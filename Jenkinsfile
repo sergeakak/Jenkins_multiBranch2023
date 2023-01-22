@@ -25,16 +25,5 @@ pipeline
                   }
               }
           }
-         stage('ContinuousDeployment_loans')
-          {
-            steps
-              {
-                script
-                  {
-                     library.newDeployment("http://172.31.93.88:8080","testapp")
-                  }
-              }
-         }
-      }	 
+     }
 }
-
