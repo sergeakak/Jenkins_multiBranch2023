@@ -1,0 +1,61 @@
+@Library('library')_
+
+pipeline
+{
+    agent any
+    stages
+      {
+        stage('ContinuousDownload_master')
+          {
+            steps
+              {
+                script
+                  {
+                     library.newGit("https://github.com/intelliqittrainings/maven.git")
+                  }
+              }
+          }
+         stage('ContinuousBuild_master')
+          {
+            steps
+              {
+                script
+                  {
+                     library.newMaven()
+                  }
+              }
+          }
+         stage('ContinuousDeployment_master')
+          {
+            steps
+              {
+                script
+                  {
+                     library.newDeployment("http://172.31.93.88:8080","testapp")
+                  }
+              }
+          }
+         stage('ContinuousTesting_master')
+          {
+            steps
+              {
+                script
+                  {
+                     library.newGit("https://github.com/intelliqittrainings/FunctionalTesting.git")
+                     library.newSelenium("/home/ubuntu/.jenkins/workspace/pipelinelibrary")
+                  }
+              }
+          }
+         stage('ContinuousDelivery_master')
+          {
+            steps
+              {
+                script
+                  {
+                     library.newDelivery("http://172.31.84.207:8080","prodapp")
+                  }
+              }
+          }  
+          
+      }
+}
