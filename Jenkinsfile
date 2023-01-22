@@ -5,7 +5,7 @@ pipeline
     agent any
     stages
       {
-        stage('ContinuousDownload_loans')
+        stage('ContinuousDownload_personalbanking')
           {
             steps
               {
@@ -15,7 +15,7 @@ pipeline
                   }
               }
           }
-         stage('ContinuousBuild_loans')
+         stage('ContinuousBuild_personalbanking')
           {
             steps
               {
